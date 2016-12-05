@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>React</title>
+	<script type="text/javascript" src="react.min.js"></script>
+	<script type="text/javascript" src="react-dom.min.js"></script>
+	<script type="text/javascript" src="browser.min.js"></script>
+	<style type="text/css">
+		#aa{
+			color: red;
+		}
+		.aa{
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	<div id="out">
+		
+	</div>
+</body>
+	<!-- 语法改成babel -->
+	<!-- 创建第一个组件,首字母大写 -->
+	<!-- react.min.js - 把diff算法以及组件核心方法封装
+	react-dom.min.js -操作dom需要用到的
+	browser.min.js -浏览器不识别babel语言/jsx语法，需要借助此文件转换，让浏览器识别
+
+	创建组件
+	1、组件命名 -英文字母开头，首字母大写，var声明
+	使用React上的createClass方法创建，render函数内返回jsx语法，return(jsx语法，xml标签(闭合标签))
+		return只能返回一个父元素标签
+	2、ReactDOM上的render方法渲染，组件标签形式(闭合标签)，存放的位置(真实的dom) -->
+<!-- 
+	样式：
+	1、基于类名 -className 声明类名（id，name属性可以正常添加）
+	2、基于innerclass(行类样式) style={json形式的样式}
+	3、全局写法 在js全局声明变量 存放相关样式（对象形式）
+	4、原型写法  位置  创建组件与渲染组件之间 -通过组件的原型声明对象，组件类通过this获取声明的对象，jsx语法的标签才能直接调用 -->
+
+	<!-- jsx 标签  注释写法 {/*  ...  */} -->
+	<script type="text/babel">
+		var style = {
+			aa:{color:'red'},
+			bb:{color:'green'}
+		}
+
+		var Demo = React.createClass({
+			render:function(){
+			var _st = this.st;
+				return(
+					<div>
+						div--hello react
+						<h1 style={style.aa}>h1标签</h1>
+						<h2 style={style.bb}>h2老哥，稳</h2>
+						<h3 style={_st.cc}>h3小姐姐react</h3>
+						<h4 style={_st.dd}>原型链写法</h4>
+					</div>
+				)
+			}
+		})
+		Demo.prototype.st={
+			cc:{color:'yellow'},
+			dd:{color:'pink'}
+		}
+		<!-- 渲染组件 -->
+		ReactDOM.render(<Demo/>,document.getElementById('out'))
+	</script>
+</html>

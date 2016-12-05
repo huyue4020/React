@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+	<title>React</title>
+	<script type="text/javascript" src="react.min.js"></script>
+	<script type="text/javascript" src="react-dom.min.js"></script>
+	<script type="text/javascript" src="browser.min.js"></script>
+</head>
+<body>
+	<div id="out"></div>
+	<!-- js事件机制
+	1、组建内部书写事件函数 ，render同级，逗号不要丢，调用通过this调用
+
+	事件写法 onClick  ，-横杠去掉，首字母大写
+
+	2、全局和原型
+	全局对象直接调用
+	原型通过获取组件原型本身对象，在调用相应方法 -->
+</body>
+	<script type="text/babel">
+		var aa = {
+			tap1:function(){
+				alert('111')
+			},
+			tap2:function(){
+				alert('222')
+			}
+		} 
+
+		var Demo = React.createClass({
+			tap:function(){
+				alert('hello World')
+			},
+			handel:function(){
+				var aa = document.getElementById('aa');
+				console.log(aa.value);
+			},
+			render:function(){
+				var _bb = this.bb;
+				return(
+					<div>
+						<button onClick={this.tap}>点击事件</button>
+						<button onClick={aa.tap1}>1全局点击事件</button>
+						<button onClick={aa.tap2}>2全局点击事件</button>
+						<h1 onClick={_bb.tap3}>1原型点击事件</h1>
+						<h1 onClick={_bb.tap4}>2原型点击事件</h1>
+						<input type="text" onChange={this.handel} id="aa"/>
+					</div>
+				)
+			}
+		})
+		
+		Demo.prototype.bb = {
+			tap3:function(){
+				alert('333')
+			},
+			tap4:function(){
+				alert('444')
+			}
+		}
+
+		ReactDOM.render(<Demo/>,document.getElementById('out'));
+	</script>
+</html>
